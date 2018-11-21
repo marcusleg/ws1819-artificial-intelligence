@@ -80,19 +80,3 @@ class FillSmall(AbstractAction):
     @staticmethod
     def execute(state: SimplifiedWaterJugState) -> SimplifiedWaterJugState:
         return SimplifiedWaterJugState(state.big_jug, 3)
-
-
-if __name__ == "__main__":
-    state = SimplifiedWaterJugProblem.create_initial_state()
-    path = [
-        FillBig.execute,
-        BigToSmall.execute,
-        EmptySmall.execute,
-        BigToSmall.execute,
-        FillBig.execute,
-        BigToSmall.execute,
-    ]
-    for action in path:
-        state = partial(action, state)()
-        print(state)
-    print(SimplifiedWaterJugProblem.goal_reached(state))
