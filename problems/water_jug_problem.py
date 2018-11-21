@@ -1,7 +1,7 @@
 from functools import partial
 from typing import List
 
-from abstract_problem import AbstractAction, AbstractProblem, AbstractState
+from problems.abstract_problem import AbstractAction, AbstractProblem, AbstractState
 
 
 class WaterJugState(AbstractState):
@@ -25,14 +25,14 @@ class WaterJugProblem(AbstractProblem):
         return [
             BigToSmall.execute,
             SmallToBig.execute,
-            EmptyBig,
-            EmptySmall,
-            FillBig,
-            FillSmall,
+            EmptyBig.execute,
+            EmptySmall.execute,
+            FillBig.execute,
+            FillSmall.execute,
         ]
 
     @staticmethod
-    def goal_reached(state: WaterJugState) -> bool:
+    def is_goal_state(state: WaterJugState) -> bool:
         return state.big_jug == 2
 
 

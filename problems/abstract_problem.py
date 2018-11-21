@@ -28,5 +28,5 @@ class AbstractProblem(ABC):
         pass
 
     @abstractstaticmethod
-    def is_goal_state(state) -> bool:
+    def is_goal_state(state: AbstractState) -> bool:
         pass
