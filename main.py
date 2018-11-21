@@ -1,4 +1,4 @@
-#/bin/python3
+#!/bin/python3
 
 from problems.water_jug_problem import WaterJugProblem
 from strategies.breadth_first_search import BreadthFirstSearch
