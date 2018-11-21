@@ -41,4 +41,10 @@ class TestProblemStandardWaterJugProblem(unittest.TestCase):
         expected_state = StandardWaterJugState(4, 4, 0)
         self.assertEqual(expected_state, new_state)
 
+    def test_323_small_to_mediun(self):
+        initial_state = StandardWaterJugState(3, 2, 3)
+        new_state = SmallToMedium.execute(initial_state)
+        expected_state = StandardWaterJugState(3, 5, 0)
+        self.assertEqual(expected_state, new_state)
+
     # TODO there's a lot of cases yet to cover

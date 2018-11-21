@@ -91,8 +91,8 @@ class SmallToMedium(AbstractAction):
     @staticmethod
     def execute(state: StandardWaterJugState) -> StandardWaterJugState:
         big = state.big_jug
-        medium = min(5, state.big_jug + state.small_jug)
-        small = max(0, state.big_jug + state.small_jug - 5)
+        medium = min(5, state.medium_jug + state.small_jug)
+        small = max(0, state.medium_jug + state.small_jug - 5)
         return StandardWaterJugState(big, medium, small)
 
 
