@@ -9,11 +9,15 @@ problems = [
     StandardWaterJugProblem,
 ]
 
+strategies = [
+    BreadthFirstSearch,
+]
+
 for problem in problems:
-    problem = problem
-    strategy = BreadthFirstSearch(problem)
-    print("Trying to find a solution for", problem.__name__,
-          "with", strategy.__class__.__name__)
-    strategy.find_solution()
-    strategy.print_solution()
-    print("\n")
+    for strategy in strategies:
+        strategy_instance = BreadthFirstSearch(problem)
+        print("Trying to find a solution for", problem.__name__,
+              "with", strategy_instance.__class__.__name__)
+        strategy_instance.find_solution()
+        strategy_instance.print_solution()
+        print("\n")
