@@ -1,7 +1,10 @@
 #/bin/python3
 
-from breadth_first_search import breadth_first_search
 from problems.water_jug_problem import WaterJugProblem
+from strategies.breadth_first_search import BreadthFirstSearch
 
 problem = WaterJugProblem
-breadth_first_search(problem)
+strategy = BreadthFirstSearch(problem)
+
+strategy.find_solution()
+strategy.print_solution()
