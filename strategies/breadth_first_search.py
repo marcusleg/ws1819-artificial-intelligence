@@ -30,6 +30,7 @@ class BreadthFirstSearch(AbstractStrategy):
                 fifo_queue.put((node, new_state, action))
 
     def print_solution(self):
+        super().print_solution()
         path = []
         node = self.goal_node
         while node != self.root:

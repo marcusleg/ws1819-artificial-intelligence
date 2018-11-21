@@ -14,4 +14,4 @@ class AbstractStrategy(ABC):
 
     @abstractmethod
     def print_solution(self):
-        pass
+        print("Initial State:", self.problem.create_initial_state())
