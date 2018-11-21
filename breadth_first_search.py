@@ -1,11 +1,15 @@
-#!/bin/python3
-
 from functools import partial
 from queue import Queue
-from water_jug_problem import State, goal_reached
+from typing import List
+
+from problems.abstract_problem import (AbstractAction, AbstractProblem,
+                                       AbstractState)
 
 
-def breadth_first_search(initial_state, actions):
+def breadth_first_search(problem: AbstractProblem):
+    initial_state = problem.create_initial_state()
+    actions = problem.get_actions()
+
     # (parent_node, state, action that lead to this state)
     root = (None, initial_state, "")
     goal_node = None
@@ -18,13 +22,13 @@ def breadth_first_search(initial_state, actions):
         node = fifo_queue.get()
         state = node[1]
         # is this node the goal?
-        if goal_reached(state):
+        if problem.is_goal_state(state):
             goal_node = node
             break
         # add new state for each possible action
         for action in actions:
             new_state = partial(action, state)()
-            fifo_queue.put((node, new_state, action.__name__))
+            fifo_queue.put((node, new_state, action))
 
     # backtrace
     path = []
@@ -35,4 +39,4 @@ def breadth_first_search(initial_state, actions):
     path.reverse()
 
     for node in path:
-        print("Action: {:15} State: {}".format(node[2], str(node[1])))
+        print("Action: {:50} State: {}".format(str(node[2]), str(node[1])))
