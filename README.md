@@ -17,4 +17,5 @@ Python 3.7 or greater. Older versions are untested.
 
 ## Possible questions
 ### Why use classes if (almost) all methods are static?
-In order to have a well defined interface we need an abstract class to derive from.
+In order to have a well defined interface we need an abstract class to derive from.  
+Can't say I find this solution very elegant, but it's the best I could come up with so far.
