@@ -1,11 +1,11 @@
 #!/bin/python3
 
-from problems.water_jug_problem import WaterJugProblem
+from problems.simplified_water_jug_problem import SimplifiedWaterJugProblem
 from problems.standard_water_jug_problem import StandardWaterJugProblem
 from strategies.breadth_first_search import BreadthFirstSearch
 
 problems = [
-    WaterJugProblem,
+    SimplifiedWaterJugProblem,
     StandardWaterJugProblem,
 ]
 
