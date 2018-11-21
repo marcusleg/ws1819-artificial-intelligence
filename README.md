@@ -3,9 +3,16 @@ In this codebase I implemented some of the problems and solutions presented in t
 
 At the time of writing (2018-11-21) only search algorithms are implemented.
 
+
 ## Goals
 * Describe problems in a unified way (see abstract_problems.py).
-* Implement generic solving strategies that operate on these abstract problems.
+* Implement generic solving strategies that operate on these abstract problems (see abstract_strategy.py).
+
+This is also a nice opportunity to play around with the type hints introduced in Python 3.5 and abstract base classes as described in PEP 3119.
+
+
+## Prerequisites
+Python 3.7 or greater. Older versions are untested.
 
 
 ## Possible questions
