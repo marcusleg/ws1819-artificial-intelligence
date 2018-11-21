@@ -11,8 +11,9 @@ problems = [
 
 for problem in problems:
     problem = problem
-    print("Trying to find a solution for", problem.__name__)
     strategy = BreadthFirstSearch(problem)
+    print("Trying to find a solution for", problem.__name__,
+          "with", strategy.__class__.__name__)
     strategy.find_solution()
     strategy.print_solution()
     print("\n")
