@@ -15,7 +15,7 @@ strategies = [
 
 for problem in problems:
     for strategy in strategies:
-        strategy_instance = BreadthFirstSearch(problem)
+        strategy_instance = strategy(problem)
         print("Trying to find a solution for", problem.__name__,
               "with", strategy_instance.__class__.__name__)
         strategy_instance.find_solution()
