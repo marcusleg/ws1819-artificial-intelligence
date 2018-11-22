@@ -1,4 +1,5 @@
 import time
+from collections import namedtuple
 from functools import partial
 from queue import Queue
 
@@ -13,24 +14,31 @@ class BreadthFirstSearch(AbstractStrategy):
     def find_solution(self):
         self.start_time = time.monotonic()
 
-        # (parent_node, state, action that lead to this state)
-        self.root = (None, self.problem.create_initial_state(), "")
+        Node = namedtuple('Node', 'parent_node, state, action')
+        self.root = Node(
+            parent_node=None,
+            state=self.problem.create_initial_state(),
+            action=""
+        )
         fifo_queue = Queue()
         fifo_queue.put(self.root)
 
         # build and traverse tree
         while True:
             # examine the next node
-            node = fifo_queue.get()
-            state = node[1]
+            this_node = fifo_queue.get()
             # is this node the goal?
-            if self.problem.is_goal_state(state):
-                self.goal_node = node
+            if self.problem.is_goal_state(this_node.state):
+                self.goal_node = this_node
                 break
             # add new state for each possible action
             for action in self.problem.get_actions():
-                new_state = partial(action, state)()
-                fifo_queue.put((node, new_state, action))
+                child_node = Node(
+                    parent_node=this_node,
+                    state=partial(action, this_node.state)(),
+                    action=action,
+                )
+                fifo_queue.put(child_node)
 
         self.stop_time = time.monotonic()
 
