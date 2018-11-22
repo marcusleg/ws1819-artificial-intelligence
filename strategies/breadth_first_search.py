@@ -48,11 +48,12 @@ class BreadthFirstSearch(AbstractStrategy):
         node = self.goal_node
         while node != self.root:
             path.append(node)
-            node = node[0]
+            node = node.parent_node
         path.reverse()
 
         for node in path:
-            print("Action: {:50} State: {}".format(str(node[2]), str(node[1])))
+            print("Action: {:50} State: {}".format(
+                str(node.action), str(node.state)))
 
     def print_resource_usage_report(self):
         print("Time taken: {:.3f} seconds".format(
