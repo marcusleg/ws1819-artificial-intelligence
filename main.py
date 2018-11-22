@@ -3,6 +3,7 @@
 from problems.simplified_water_jug_problem import SimplifiedWaterJugProblem
 from problems.standard_water_jug_problem import StandardWaterJugProblem
 from strategies.breadth_first_search import BreadthFirstSearch
+from strategies.iterative_depth_first_search import IterativeDepthFirstSearch
 
 problems = [
     SimplifiedWaterJugProblem,
@@ -11,6 +12,7 @@ problems = [
 
 strategies = [
     BreadthFirstSearch,
+    IterativeDepthFirstSearch,
 ]
 
 for problem in problems:
