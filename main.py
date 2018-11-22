@@ -20,4 +20,5 @@ for problem in problems:
               "with", strategy_instance.__class__.__name__)
         strategy_instance.find_solution()
         strategy_instance.print_solution()
+        strategy_instance.print_resource_usage_report()
         print("\n")

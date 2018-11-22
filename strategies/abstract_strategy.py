@@ -15,3 +15,6 @@ class AbstractStrategy(ABC):
     @abstractmethod
     def print_solution(self):
         print("Initial State:", self.problem.create_initial_state())
+
+    def print_resource_usage_report(self):
+        pass

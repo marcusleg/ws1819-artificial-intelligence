@@ -1,3 +1,4 @@
+import time
 from functools import partial
 from queue import Queue
 
@@ -10,6 +11,8 @@ class BreadthFirstSearch(AbstractStrategy):
     goal_node = None
 
     def find_solution(self):
+        self.start_time = time.monotonic()
+
         # (parent_node, state, action that lead to this state)
         self.root = (None, self.problem.create_initial_state(), "")
         fifo_queue = Queue()
@@ -29,6 +32,8 @@ class BreadthFirstSearch(AbstractStrategy):
                 new_state = partial(action, state)()
                 fifo_queue.put((node, new_state, action))
 
+        self.stop_time = time.monotonic()
+
     def print_solution(self):
         super().print_solution()
         path = []
@@ -40,3 +45,7 @@ class BreadthFirstSearch(AbstractStrategy):
 
         for node in path:
             print("Action: {:50} State: {}".format(str(node[2]), str(node[1])))
+
+    def print_resource_usage_report(self):
+        print("Time taken: {:.3f} seconds".format(
+            self.stop_time - self.start_time))
