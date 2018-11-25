@@ -22,50 +22,50 @@ class StandardWaterJugProblemState(AbstractProblemState):
         return "(" + str(self.big_jug) + ", " + str(self.medium_jug) + ", " + str(self.small_jug) + ")"
 
     @staticmethod
-    def create_initial_state():
+    def create_initial_state() -> 'StandardWaterJugProblemState':
         return StandardWaterJugProblemState(8, 0, 0)
 
     def get_actions(self):
         return [
-            self. big_to_medium,
-            self. big_to_small,
+            self.big_to_medium,
+            self.big_to_small,
             self.medium_to_big,
             self.medium_to_small,
             self.small_to_big,
             self.small_to_medium,
         ]
 
-    def big_to_medium(self):
+    def big_to_medium(self) -> 'StandardWaterJugProblemState':
         big = max(0, self.big_jug + self.medium_jug - 5)
         medium = min(5, self.big_jug + self.medium_jug)
         small = self.small_jug
         return StandardWaterJugProblemState(big, medium, small)
 
-    def big_to_small(self):
+    def big_to_small(self) -> 'StandardWaterJugProblemState':
         big = max(0, self.big_jug - (3 - self.small_jug))
         medium = self.medium_jug
         small = min(3, self.big_jug + self.small_jug)
         return StandardWaterJugProblemState(big, medium, small)
 
-    def medium_to_big(self):
+    def medium_to_big(self) -> 'StandardWaterJugProblemState':
         big = min(8, self.big_jug + self.medium_jug)
         medium = max(0, self.big_jug + self.medium_jug - 8)
         small = self.small_jug
         return StandardWaterJugProblemState(big, medium, small)
 
-    def medium_to_small(self):
+    def medium_to_small(self) -> 'StandardWaterJugProblemState':
         big = self.big_jug
         medium = max(0, self.medium_jug + self.small_jug - 3)
         small = min(3, self.medium_jug + self.small_jug)
         return StandardWaterJugProblemState(big, medium, small)
 
-    def small_to_medium(self):
+    def small_to_medium(self) -> 'StandardWaterJugProblemState':
         big = self.big_jug
         medium = min(5, self.medium_jug + self.small_jug)
         small = max(0, self.medium_jug + self.small_jug - 5)
         return StandardWaterJugProblemState(big, medium, small)
 
-    def small_to_big(self):
+    def small_to_big(self) -> 'StandardWaterJugProblemState':
         big = min(8, self.big_jug + self.small_jug)
         medium = self.medium_jug
         small = max(0, self.big_jug + self.small_jug - 8)
