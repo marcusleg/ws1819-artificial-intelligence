@@ -1,4 +1,3 @@
-from functools import partial
 from typing import List
 
 from problems.abstract_problem import AbstractProblem, AbstractState

@@ -1,6 +1,5 @@
 import time
 from collections import namedtuple
-from functools import partial
 from queue import Queue
 
 from problems.abstract_problem import AbstractProblem
