@@ -2,7 +2,6 @@ import time
 from collections import namedtuple
 from queue import LifoQueue
 
-from problems.abstract_problem import AbstractProblem
 from strategies.abstract_strategy import AbstractStrategy
 
 Node = namedtuple('Node', 'parent_node, depth, state, action')

@@ -1,13 +1,13 @@
 #!/bin/python3
 
-from problems.simplified_water_jug_problem import SimplifiedWaterJugProblem
-from problems.standard_water_jug_problem import StandardWaterJugProblem
+from problems.simplified_water_jug_problem import SimplifiedWaterJugProblemState
+from problems.standard_water_jug_problem import StandardWaterJugProblemState
 from strategies.breadth_first_search import BreadthFirstSearch
 from strategies.iterative_depth_first_search import IterativeDepthFirstSearch
 
 problems = [
-    SimplifiedWaterJugProblem,
-    StandardWaterJugProblem,
+    SimplifiedWaterJugProblemState,
+    StandardWaterJugProblemState,
 ]
 
 strategies = [

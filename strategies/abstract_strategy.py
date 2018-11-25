@@ -1,11 +1,11 @@
 from abc import ABC, abstractmethod
 
-from problems.abstract_problem import AbstractProblem
+from problems.abstract_problem import AbstractProblemState
 
 
 class AbstractStrategy(ABC):
 
-    def __init__(self, problem: AbstractProblem):
+    def __init__(self, problem: AbstractProblemState):
         self.problem = problem
 
     @abstractmethod

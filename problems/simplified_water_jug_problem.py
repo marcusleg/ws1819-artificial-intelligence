@@ -1,9 +1,9 @@
 from typing import List
 
-from problems.abstract_problem import AbstractProblem, AbstractState
+from problems.abstract_problem import AbstractProblemState
 
 
-class SimplifiedWaterJugState(AbstractState):
+class SimplifiedWaterJugProblemState(AbstractProblemState):
 
     def __init__(self, gallons_big_jug: int, gallons_small_jug: int):
         self.big_jug = gallons_big_jug
@@ -11,6 +11,10 @@ class SimplifiedWaterJugState(AbstractState):
 
     def __str__(self) -> str:
         return "(" + str(self.big_jug) + ", " + str(self.small_jug) + ")"
+
+    @staticmethod
+    def create_initial_state():
+        return SimplifiedWaterJugProblemState(0, 0)
 
     def get_actions(self):
         return [
@@ -25,31 +29,24 @@ class SimplifiedWaterJugState(AbstractState):
     def big_to_small(self):
         big = max(0, self.big_jug + self.small_jug - 3)
         small = min(3, self.big_jug + self.small_jug)
-        return SimplifiedWaterJugState(big, small)
+        return SimplifiedWaterJugProblemState(big, small)
 
     def small_to_big(self):
         big = min(4, self.big_jug + self.small_jug)
         small = max(0, self.big_jug + self.small_jug - 4)
-        return SimplifiedWaterJugState(big, small)
+        return SimplifiedWaterJugProblemState(big, small)
 
     def empty_big(self):
-        return SimplifiedWaterJugState(0, self.small_jug)
+        return SimplifiedWaterJugProblemState(0, self.small_jug)
 
     def empty_small(self):
-        return SimplifiedWaterJugState(self.big_jug, 0)
+        return SimplifiedWaterJugProblemState(self.big_jug, 0)
 
     def fill_big(self):
-        return SimplifiedWaterJugState(4, self.small_jug)
+        return SimplifiedWaterJugProblemState(4, self.small_jug)
 
     def fill_small(self):
-        return SimplifiedWaterJugState(self.big_jug, 3)
+        return SimplifiedWaterJugProblemState(self.big_jug, 3)
 
     def is_goal_state(self) -> bool:
         return self.big_jug == 2
-
-
-class SimplifiedWaterJugProblem(AbstractProblem):
-
-    @staticmethod
-    def create_initial_state() -> SimplifiedWaterJugState:
-        return SimplifiedWaterJugState(0, 0)
