@@ -28,7 +28,7 @@ class BreadthFirstSearch(AbstractStrategy):
             # examine the next node
             this_node = fifo_queue.get()
             # is this node the goal?
-            if self.problem.is_goal_state(this_node.state):
+            if this_node.state.is_goal_state():
                 self.goal_node = this_node
                 break
             # add new state for each possible action

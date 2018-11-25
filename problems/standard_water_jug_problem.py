@@ -67,13 +67,12 @@ class StandardWaterJugState(AbstractState):
         small = max(0, self.big_jug + self.small_jug - 8)
         return StandardWaterJugState(big, medium, small)
 
+    def is_goal_state(self) -> bool:
+        return self.big_jug == 4 and self.medium_jug == 4 and self.small_jug == 0
+
 
 class StandardWaterJugProblem(AbstractProblem):
 
     @staticmethod
     def create_initial_state() -> StandardWaterJugState:
         return StandardWaterJugState(8, 0, 0)
-
-    @staticmethod
-    def is_goal_state(state: StandardWaterJugState) -> bool:
-        return state.big_jug == 4 and state.medium_jug == 4 and state.small_jug == 0

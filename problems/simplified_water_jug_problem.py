@@ -45,13 +45,12 @@ class SimplifiedWaterJugState(AbstractState):
     def fill_small(self):
         return SimplifiedWaterJugState(self.big_jug, 3)
 
+    def is_goal_state(self) -> bool:
+        return self.big_jug == 2
+
 
 class SimplifiedWaterJugProblem(AbstractProblem):
 
     @staticmethod
     def create_initial_state() -> SimplifiedWaterJugState:
         return SimplifiedWaterJugState(0, 0)
-
-    @staticmethod
-    def is_goal_state(state: SimplifiedWaterJugState) -> bool:
-        return state.big_jug == 2
