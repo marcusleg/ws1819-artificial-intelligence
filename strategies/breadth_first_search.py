@@ -32,10 +32,10 @@ class BreadthFirstSearch(AbstractStrategy):
                 self.goal_node = this_node
                 break
             # add new state for each possible action
-            for action in self.problem.get_actions():
+            for action in this_node.state.get_actions():
                 child_node = Node(
                     parent_node=this_node,
-                    state=partial(action, this_node.state)(),
+                    state=action(),
                     action=action,
                 )
                 fifo_queue.put(child_node)

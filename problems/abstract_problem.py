@@ -11,11 +11,8 @@ class AbstractState(ABC):
     def __repr__(self):
         return self.__str__()
 
-
-class AbstractAction(ABC):
-
-    @abstractstaticmethod
-    def execute(state: AbstractState) -> AbstractState:
+    @abstractmethod
+    def get_actions(self):
         pass
 
 
@@ -24,10 +21,6 @@ class AbstractProblem(ABC):
 
     @abstractstaticmethod
     def create_initial_state() -> AbstractState:
-        pass
-
-    @abstractstaticmethod
-    def get_actions() -> List[AbstractAction]:
         pass
 
     @abstractstaticmethod
