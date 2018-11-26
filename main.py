@@ -2,12 +2,14 @@
 
 from problems.simplified_water_jug_problem import SimplifiedWaterJugProblemState
 from problems.standard_water_jug_problem import StandardWaterJugProblemState
+from problems.eight_puzzle_problem import EightPuzzleProblemState
 from strategies.breadth_first_search import BreadthFirstSearch
 from strategies.iterative_depth_first_search import IterativeDepthFirstSearch
 
 problems = [
     SimplifiedWaterJugProblemState,
     StandardWaterJugProblemState,
+    EightPuzzleProblemState,
 ]
 
 strategies = [
