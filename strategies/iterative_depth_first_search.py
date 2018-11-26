@@ -51,7 +51,7 @@ class IterativeDepthFirstSearch(AbstractStrategy):
                     parent_node=this_node,
                     depth=this_node.depth + 1,
                     state=action(),
-                    action=action,
+                    action=action.__name__,
                 )
                 lifo_queue.put(child_node)
         return False
@@ -67,7 +67,7 @@ class IterativeDepthFirstSearch(AbstractStrategy):
         path.reverse()
 
         for node in path:
-            print("Action: {:50} State: {}".format(
+            print("Action: {:20} State: {}".format(
                 str(node.action), str(node.state)))
 
     def print_resource_usage_report(self):

@@ -35,7 +35,7 @@ class BreadthFirstSearch(AbstractStrategy):
                 child_node = Node(
                     parent_node=this_node,
                     state=action(),
-                    action=action,
+                    action=action.__name__,
                 )
                 fifo_queue.put(child_node)
 
@@ -51,7 +51,7 @@ class BreadthFirstSearch(AbstractStrategy):
         path.reverse()
 
         for node in path:
-            print("Action: {:50} State: {}".format(
+            print("Action: {:20} State: {}".format(
                 str(node.action), str(node.state)))
 
     def print_resource_usage_report(self):
