@@ -41,7 +41,6 @@ class IterativeDepthFirstSearch(AbstractStrategy):
             if this_node.state.is_goal_state():
                 self.goal_node = this_node
                 return True
-                break
             # don't add child nodes if max depth is reached
             if this_node.depth >= depth_limit:
                 continue
@@ -63,7 +62,7 @@ class IterativeDepthFirstSearch(AbstractStrategy):
         node = self.goal_node
         while node != self.root:
             path.append(node)
-            node = node[0]
+            node = node.parent_node
         path.reverse()
 
         for node in path:
