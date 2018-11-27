@@ -7,6 +7,7 @@ class EightPuzzleProblemState(AbstractProblemState):
     # 0 1 2
     # 3 4 5
     # 6 7 8
+    goal_state = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 
     def __init__(self, state):
         self.state = state
@@ -27,50 +28,64 @@ class EightPuzzleProblemState(AbstractProblemState):
 
     def get_actions(self):
         actions = []
-        if self.empty_field_pos() > 2:
+        if self.tile_position(0) > 2:
             actions.append(self.top_down)
-        if self.empty_field_pos() < 6:
+        if self.tile_position(0) < 6:
             actions.append(self.bottom_up)
-        if self.empty_field_pos() not in [0, 3, 6]:
+        if self.tile_position(0) not in [0, 3, 6]:
             actions.append(self.left_right)
-        if self.empty_field_pos() not in [2, 5, 8]:
+        if self.tile_position(0) not in [2, 5, 8]:
             actions.append(self.right_left)
         return actions
 
+    def heuristic(self) -> int:
+        sum_of_distances = 0
+        for i in range(1, 9):
+            sum_of_distances += self.manhatten_distance(
+                self.tile_position(i),
+                self.goal_state.index(i)
+            )
+        return sum_of_distances
+
+    @staticmethod
+    def manhatten_distance(a: int, b: int) -> int:
+        a_x = a % 3
+        a_y = int(a / 3)
+        b_x = b % 3
+        b_y = int(b / 3)
+        return int(abs(a_x - b_x) + abs(a_y - b_y))
+
     def is_goal_state(self):
-        return self.state == [0, 1, 2, 3, 4, 5, 6, 7, 8]
+        return self.state == self.goal_state
 
-    def empty_field_pos(self) -> int:
-        """Returns the index of the field containing the zero"""
-        return self.state.index(0)
-
-    def swap_pos(self, i, j):
-        self.state[i], self.state[j] = self.state[j], self.state[i]
+    def tile_position(self, n: int) -> int:
+        """Returns the index of the field containing n"""
+        return self.state.index(n)
 
     def top_down(self) -> 'EightPuzzleProblemState':
         """Move tile above the 0 down"""
-        p0 = self.empty_field_pos()
+        p0 = self.tile_position(0)
         new_state = self.state.copy()
         new_state[p0], new_state[p0 - 3] = new_state[p0 - 3], new_state[p0]
         return EightPuzzleProblemState(new_state)
 
     def bottom_up(self) -> 'EightPuzzleProblemState':
         """Move tile below the 0 up"""
-        p0 = self.empty_field_pos()
+        p0 = self.tile_position(0)
         new_state = self.state.copy()
         new_state[p0], new_state[p0 + 3] = new_state[p0 + 3], new_state[p0]
         return EightPuzzleProblemState(new_state)
 
     def left_right(self) -> 'EightPuzzleProblemState':
         """Move tile left of 0 right"""
-        p0 = self.empty_field_pos()
+        p0 = self.tile_position(0)
         new_state = self.state.copy()
         new_state[p0], new_state[p0 - 1] = new_state[p0 - 1], new_state[p0]
         return EightPuzzleProblemState(new_state)
 
     def right_left(self) -> 'EightPuzzleProblemState':
         """Move tile right of 0 left"""
-        p0 = self.empty_field_pos()
+        p0 = self.tile_position(0)
         new_state = self.state.copy()
         new_state[p0], new_state[p0 + 1] = new_state[p0 + 1], new_state[p0]
         return EightPuzzleProblemState(new_state)
