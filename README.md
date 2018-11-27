@@ -1,4 +1,4 @@
-# Not sure how to name this yet
+# Artificial Intelligence WS 2018/2019
 In this codebase I implemented some of the problems and solutions presented in the Artificial Intelligence class of my masters degree. The class is based on the book *Artificial Intelligence: A Modern Approach* by *Stuart Russell* and *Peter Norvig*.
 
 At the time of writing (2018-11-21) only search algorithms are implemented.
@@ -12,7 +12,7 @@ This is also a nice opportunity to play around with the type hints introduced in
 
 
 ## Prerequisites
-Python 3.7 or greater. Older versions are untested.
+Python 3.5 or greater.
 
 
 ## Possible questions
