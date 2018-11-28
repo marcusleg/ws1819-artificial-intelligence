@@ -20,7 +20,6 @@ class AbstractProblemState(ABC):
     def get_actions(self):
         pass
 
-    @abstractmethod
     def heuristic(self) -> int:
         return None
 
