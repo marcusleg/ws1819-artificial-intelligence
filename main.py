@@ -21,7 +21,7 @@ strategies = [
 if len(argv) == 3:
     # select problem and strategy according to provided cli arguments
     problem = problems[int(argv[1])]
-    strategy = strategies[int(argv[1])]
+    strategy = strategies[int(argv[2])]
 else:
     # let user choose problem and strategy at runtime
     problem_index = -1
