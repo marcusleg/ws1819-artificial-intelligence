@@ -13,12 +13,16 @@ class AbstractProblemState(ABC):
         return self.__str__()
 
     @abstractstaticmethod
-    def create_initial_state():
+    def create_initial_state() -> 'AbstractProblemState':
         pass
 
     @abstractmethod
     def get_actions(self):
         pass
+
+    @abstractmethod
+    def heuristic(self) -> int:
+        return None
 
     @abstractmethod
     def is_goal_state(self) -> bool:
