@@ -2,7 +2,6 @@ import time
 from collections import namedtuple
 from queue import Queue
 
-from problems.abstract_problem import AbstractProblemState
 from strategies.abstract_strategy import AbstractStrategy
 
 

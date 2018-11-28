@@ -3,8 +3,6 @@ Formalization of the Water Jug Problem as described here:
 https://en.wikipedia.org/wiki/Water_pouring_puzzle#Standard_example
 """
 
-from typing import List
-
 from problems.abstract_problem import AbstractProblemState
 
 
