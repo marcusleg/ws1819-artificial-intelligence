@@ -43,13 +43,13 @@ class TestProblemStandardWaterJugProblem(unittest.TestCase):
         expected_state = StandardWaterJugProblemState(4, 4, 0)
         self.assertEqual(expected_state, new_state)
 
-    def test_440_small_to_mediun(self):
+    def test_440_small_to_medium(self):
         initial_state = StandardWaterJugProblemState(4, 4, 0)
         new_state = initial_state.small_to_medium()
         expected_state = StandardWaterJugProblemState(4, 4, 0)
         self.assertEqual(expected_state, new_state)
 
-    def test_323_small_to_mediun(self):
+    def test_323_small_to_medium(self):
         initial_state = StandardWaterJugProblemState(3, 2, 3)
         new_state = initial_state.small_to_medium()
         expected_state = StandardWaterJugProblemState(3, 5, 0)
