@@ -89,9 +89,3 @@ class EightPuzzleProblemState(AbstractProblemState):
         new_state = self.state.copy()
         new_state[p0], new_state[p0 + 1] = new_state[p0 + 1], new_state[p0]
         return EightPuzzleProblemState(new_state)
-
-if __name__ == "__main__":
-    state = EightPuzzleProblemState.create_initial_state()
-    for action in state.get_actions():
-        new_state = action()
-        print(new_state)
