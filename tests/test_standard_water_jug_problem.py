@@ -5,6 +5,14 @@ from problems.standard_water_jug_problem import *
 
 class TestProblemStandardWaterJugProblem(unittest.TestCase):
 
+    def test_initial_state_is_not_goal_state(self):
+        initial_state = StandardWaterJugProblemState.create_initial_state()
+        self.assertFalse(initial_state.is_goal_state())
+
+    def test_is_goal_state_with_correct_goal(self):
+        state = StandardWaterJugProblemState(4, 4, 0)
+        self.assertTrue(state.is_goal_state())
+
     def test_440_big_to_medium(self):
         initial_state = StandardWaterJugProblemState(4, 4, 0)
         new_state = initial_state.big_to_medium()

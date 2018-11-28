@@ -259,7 +259,11 @@ class TestEightPuzzleProblem(unittest.TestCase):
             action.__name__ for action in initial_state.get_actions()]
         self.assertListEqual(expected_actions, actual_actions)
 
-    def test_is_goal_state(self):
+    def test_initial_state_is_not_goal_state(self):
+        state = EightPuzzleProblemState.create_initial_state()
+        self.assertFalse(state.is_goal_state())
+
+    def test_is_goal_state_with_correct_goal(self):
         state = EightPuzzleProblemState([
             0, 1, 2,
             3, 4, 5,
