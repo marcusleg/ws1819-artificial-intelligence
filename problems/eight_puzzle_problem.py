@@ -61,6 +61,36 @@ class EightPuzzleProblemState(AbstractProblemState):
             )
         return sum_of_distances
 
+    def heuristic3(self) -> int:
+        """Gaschnig's heuristic as described on the exercise sheet"""
+        # create a copy of current state to mess around with
+        temp_state = self.state.copy()
+
+        num_swaps = 0
+
+        while not temp_state == self.goal_state:
+            # position of empty field
+            pos_zero = temp_state.index(0)
+            # what tile belongs where the empty field is now
+            should_be = self.goal_state[pos_zero]
+            # if empty field is already in correct position, temporarily move an
+            # incorrectly placed tile to that position
+            if should_be == 0:
+                i = 1
+                while temp_state.index(1) == self.goal_state.index(1):
+                    i += 1
+                temp_state[pos_zero], temp_state[
+                    i] = temp_state[i], temp_state[pos_zero]
+                num_swaps += 1
+                continue
+            pos_should_be = temp_state.index(should_be)
+            # swap empty field with the tile that should be there
+            print("Swapping", pos_zero, pos_should_be)
+            temp_state[pos_zero], temp_state[pos_should_be] = temp_state[
+                pos_should_be], temp_state[pos_zero]
+            num_swaps += 1
+        return num_swaps
+
     @staticmethod
     def manhatten_distance(a: int, b: int) -> int:
         a_x = a % 3

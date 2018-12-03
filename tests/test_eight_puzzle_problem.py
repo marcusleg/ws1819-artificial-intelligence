@@ -302,3 +302,45 @@ class TestEightPuzzleProblem(unittest.TestCase):
             6, 7, 8
         ])
         self.assertEqual(1 + 1 + 2 + 1 + 1 + 2, state.heuristic2())
+
+    def test_heuristic3_example1(self):
+        state = EightPuzzleProblemState([
+            0, 2, 3,
+            4, 5, 1,
+            6, 7, 8
+        ])
+        self.assertEqual(6, state.heuristic3())
+
+    def test_heuristic3_example2(self):
+        state = EightPuzzleProblemState([
+            1, 2, 3,
+            4, 0, 5,
+            6, 7, 8
+        ])
+        self.assertEqual(4, state.heuristic3())
+
+    def test_heuristic3_example3(self):
+        state = EightPuzzleProblemState([
+            8, 1, 2,
+            5, 3, 6,
+            0, 7, 4
+        ])
+        self.assertEqual(5, state.heuristic3())
+        state = EightPuzzleProblemState([
+            8, 1, 2,
+            5, 3, 0,
+            6, 7, 4
+        ])
+        self.assertEqual(4, state.heuristic3())
+        state = EightPuzzleProblemState([
+            8, 1, 2,
+            5, 3, 4,
+            6, 7, 0
+        ])
+        self.assertEqual(3, state.heuristic3())
+        state = EightPuzzleProblemState([
+            0, 1, 2,
+            5, 3, 4,
+            6, 7, 8
+        ])
+        self.assertEqual(2, state.heuristic3())
