@@ -287,10 +287,18 @@ class TestEightPuzzleProblem(unittest.TestCase):
             d = EightPuzzleProblemState.manhatten_distance(t[0], t[1])
             self.assertEqual(d, t[2])
 
-    def test_heuristic(self):
+    def test_heuristic1(self):
         state = EightPuzzleProblemState([
             0, 2, 3,
             4, 5, 1,
             6, 7, 8
         ])
-        self.assertEqual(1 + 1 + 2 + 1 + 1 + 2, state.heuristic())
+        self.assertEqual(5, state.heuristic1())
+
+    def test_heuristic2(self):
+        state = EightPuzzleProblemState([
+            0, 2, 3,
+            4, 5, 1,
+            6, 7, 8
+        ])
+        self.assertEqual(1 + 1 + 2 + 1 + 1 + 2, state.heuristic2())

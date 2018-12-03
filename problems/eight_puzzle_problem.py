@@ -37,7 +37,22 @@ class EightPuzzleProblemState(AbstractProblemState):
             actions.append(self.right_left)
         return actions
 
-    def heuristic(self) -> int:
+    def get_heuristics(self):
+        return [
+            self.heuristic1,
+            self.heuristic2,
+        ]
+
+    def heuristic1(self) -> int:
+        """Number of tiles that are not in the correct position"""
+        incorrectly_placed = 0
+        for i in range(1, 9):
+            if self.tile_position(i) != self.goal_state.index(i):
+                incorrectly_placed += 1
+        return incorrectly_placed
+
+    def heuristic2(self) -> int:
+        """Sum of Manhatten distances for each tile from current position to goal position"""
         sum_of_distances = 0
         for i in range(1, 9):
             sum_of_distances += self.manhatten_distance(
