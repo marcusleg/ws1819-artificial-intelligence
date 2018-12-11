@@ -22,8 +22,7 @@ class EightPuzzleProblemState(AbstractProblemState):
 
     @staticmethod
     def create_initial_state():
-        # return EightPuzzleProblemState([7, 2, 4, 5, 0, 6, 8, 3, 1])
-        return EightPuzzleProblemState([3, 1, 2, 4, 7, 5, 6, 8, 0])
+        return EightPuzzleProblemState([7, 2, 4, 5, 0, 6, 8, 3, 1])
 
     def get_actions(self):
         actions = []
