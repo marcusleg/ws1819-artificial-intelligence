@@ -8,8 +8,9 @@ class EightPuzzleProblemState(AbstractProblemState):
     # 6 7 8
     goal_state = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 
-    def __init__(self, state):
+    def __init__(self, state, heuristic=0):
         self.state = state
+        self.use_heuristic_num = heuristic
 
     def __str__(self):
         # return self.state[:3] + "\n" + self.state[3:6] + "\n" +
@@ -21,8 +22,8 @@ class EightPuzzleProblemState(AbstractProblemState):
         return self.state == other.state
 
     @staticmethod
-    def create_initial_state():
-        return EightPuzzleProblemState([7, 2, 4, 5, 0, 6, 8, 3, 1])
+    def create_initial_state(heuristic=0):
+        return EightPuzzleProblemState([7, 2, 4, 5, 0, 6, 8, 3, 1], heuristic)
 
     def get_actions(self):
         actions = []
@@ -36,7 +37,15 @@ class EightPuzzleProblemState(AbstractProblemState):
             actions.append(self.right_left)
         return actions
 
-    def heuristic(self) -> int:
+    def get_heuristics(self):
+        return [
+            self.heuristic_manhatten_distance,
+        ]
+
+    def heuristic(self):
+        return self.get_heuristics()[self.use_heuristic_num]()
+
+    def heuristic_manhatten_distance(self) -> int:
         sum_of_distances = 0
         for i in range(1, 9):
             sum_of_distances += self.manhatten_distance(
@@ -65,25 +74,25 @@ class EightPuzzleProblemState(AbstractProblemState):
         p0 = self.tile_position(0)
         new_state = self.state.copy()
         new_state[p0], new_state[p0 - 3] = new_state[p0 - 3], new_state[p0]
-        return EightPuzzleProblemState(new_state)
+        return EightPuzzleProblemState(new_state, self.use_heuristic_num)
 
     def bottom_up(self) -> 'EightPuzzleProblemState':
         """Move tile below the 0 up"""
         p0 = self.tile_position(0)
         new_state = self.state.copy()
         new_state[p0], new_state[p0 + 3] = new_state[p0 + 3], new_state[p0]
-        return EightPuzzleProblemState(new_state)
+        return EightPuzzleProblemState(new_state, self.use_heuristic_num)
 
     def left_right(self) -> 'EightPuzzleProblemState':
         """Move tile left of 0 right"""
         p0 = self.tile_position(0)
         new_state = self.state.copy()
         new_state[p0], new_state[p0 - 1] = new_state[p0 - 1], new_state[p0]
-        return EightPuzzleProblemState(new_state)
+        return EightPuzzleProblemState(new_state, self.use_heuristic_num)
 
     def right_left(self) -> 'EightPuzzleProblemState':
         """Move tile right of 0 left"""
         p0 = self.tile_position(0)
         new_state = self.state.copy()
         new_state[p0], new_state[p0 + 1] = new_state[p0 + 1], new_state[p0]
-        return EightPuzzleProblemState(new_state)
+        return EightPuzzleProblemState(new_state, self.use_heuristic_num)
