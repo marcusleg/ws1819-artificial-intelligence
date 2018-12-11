@@ -19,6 +19,5 @@ class AbstractStrategy(ABC):
     def print_resource_usage_report(self):
         pass
 
-    @staticmethod
-    def requires_heuristic() -> bool:
+    def requires_heuristic(self) -> bool:
         return False
