@@ -20,8 +20,8 @@ class AbstractProblemState(ABC):
     def get_actions(self):
         pass
 
-    def get_heuristics(self):
-        return []
+    def heuristic(self) -> int:
+        return None
 
     @abstractmethod
     def is_goal_state(self) -> bool:

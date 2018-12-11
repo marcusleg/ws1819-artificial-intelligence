@@ -45,8 +45,6 @@ else:
 
 # try to find a solution and print it
 strategy_instance = strategy(problem)
-if strategy_instance.requires_heuristic() and len(problem.get_heuristics()) == 0:
-    exit(problem.__name__, "needs to provide one or more heuristics")
 print("Trying to find a solution for", problem.__name__,
       "with", strategy_instance.__class__.__name__)
 strategy_instance.find_solution()
