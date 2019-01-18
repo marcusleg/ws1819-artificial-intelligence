@@ -55,8 +55,7 @@ class IterativeDepthFirstSearch(AbstractStrategy):
                 lifo_queue.put(child_node)
         return False
 
-    def print_solution(self):
-        super().print_solution()
+    def get_solution(self) -> str:
         # backtrace from goal_node to root
         path = []
         node = self.goal_node
@@ -65,9 +64,15 @@ class IterativeDepthFirstSearch(AbstractStrategy):
             node = node.parent_node
         path.reverse()
 
+        solution = ""
         for node in path:
-            print("Action: {:20} State: {}".format(
-                str(node.action), str(node.state)))
+            solution += "Action: {:20} State: {}".format(
+                str(node.action), str(node.state)) + "\n"
+        return solution
+
+    def print_solution(self):
+        super().print_solution()
+        print(self.get_solution())
 
     def print_resource_usage_report(self):
         print("Time taken: {:.3f} seconds".format(
