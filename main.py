@@ -4,6 +4,7 @@ from sys import argv
 from problems.simplified_water_jug_problem import SimplifiedWaterJugProblemState
 from problems.standard_water_jug_problem import StandardWaterJugProblemState
 from problems.eight_puzzle_problem import EightPuzzleProblemState
+from problems.eight_puzzle_problem_n_dimen import EightPuzzleProblemStateNDim
 from strategies.a_star_search import AStarStrategy
 from strategies.breadth_first_search import BreadthFirstSearch
 from strategies.iterative_depth_first_search import IterativeDepthFirstSearch
@@ -12,6 +13,7 @@ problems = [
     SimplifiedWaterJugProblemState,
     StandardWaterJugProblemState,
     EightPuzzleProblemState,
+    EightPuzzleProblemStateNDim,
 ]
 
 strategies = [

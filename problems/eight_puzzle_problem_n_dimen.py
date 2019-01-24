@@ -3,16 +3,16 @@ import numpy as np
 import random as ran
 
 
-class EightPuzzleProblemState(AbstractProblemState):
+class EightPuzzleProblemStateNDim(AbstractProblemState):
     # Grid positions are defined as such:
     # 0 1 2
     # 3 4 5
     # 6 7 8
     # goal_state = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 
-    def __init__(self, state, heuristic=0, n=3):
-        self.goal_state = self.get_goal_state(self)  # depending on dimension we create new goal state
-        self.state = self.create_initial_state(self)  # state # shuffles the goal_state and checks if it is decidable
+    def __init__(self, heuristic=0, n=3):
+        self.goal_state = self.get_goal_state(n)  # depending on dimension we create new goal state
+        self.state = self.create_initial_state_state(self)  # state # shuffles the goal_state and checks if it is decidable
         self.use_heuristic_num = heuristic
         self.n = n  # dimension
 
@@ -34,7 +34,7 @@ class EightPuzzleProblemState(AbstractProblemState):
 
     @staticmethod
     def create_initial_state(heuristic=0):
-        return EightPuzzleProblemState([7, 2, 4, 5, 0, 6, 8, 3, 1], heuristic)
+        return EightPuzzleProblemStateNDim(heuristic, 3)
 
     def get_actions(self):
         actions = []
@@ -94,47 +94,47 @@ class EightPuzzleProblemState(AbstractProblemState):
         """Returns the index of the field containing n"""
         return self.state.index(n)
 
-    def top_down(self) -> 'EightPuzzleProblemState':
+    def top_down(self) -> 'EightPuzzleProblemStateNDim':
         """Move tile above the 0 down"""
         p0 = self.tile_position(0)
         new_state = self.state.copy()
         new_state[p0], new_state[p0 - self.n] = new_state[p0 - self.n], new_state[p0]
-        return EightPuzzleProblemState(new_state, self.use_heuristic_num)
+        return EightPuzzleProblemStateNDim(new_state, self.use_heuristic_num)
 
-    def bottom_up(self) -> 'EightPuzzleProblemState':
+    def bottom_up(self) -> 'EightPuzzleProblemStateNDim':
         """Move tile below the 0 up"""
         p0 = self.tile_position(0)
         new_state = self.state.copy()
         new_state[p0], new_state[p0 + self.n] = new_state[p0 + self.n], new_state[p0]
-        return EightPuzzleProblemState(new_state, self.use_heuristic_num)
+        return EightPuzzleProblemStateNDim(new_state, self.use_heuristic_num)
 
-    def left_right(self) -> 'EightPuzzleProblemState':
+    def left_right(self) -> 'EightPuzzleProblemStateNDim':
         """Move tile left of 0 right"""
         p0 = self.tile_position(0)
         new_state = self.state.copy()
         new_state[p0], new_state[p0 - 1] = new_state[p0 - 1], new_state[p0]
-        return EightPuzzleProblemState(new_state, self.use_heuristic_num)
+        return EightPuzzleProblemStateNDim(new_state, self.use_heuristic_num)
 
     def right_left(self) -> 'EightPuzzleProblemState':
         """Move tile right of 0 left"""
         p0 = self.tile_position(0)
         new_state = self.state.copy()
         new_state[p0], new_state[p0 + 1] = new_state[p0 + 1], new_state[p0]
-        return EightPuzzleProblemState(new_state, self.use_heuristic_num)
+        return EightPuzzleProblemStateNDim(new_state, self.use_heuristic_num)
 
-    def foward_backwards(self) -> 'EightPuzzleProblemState':
+    def foward_backwards(self) -> 'EightPuzzleProblemStateNDim':
         """Move tile forward of 0 backwards"""
         p0 = self.tile_position(0)
         new_state = self.state.copy()
         new_state[p0], new_state[p0 - self.n ** 2] = new_state[p0 - self.n ** 2], new_state[p0]
-        return EightPuzzleProblemState(new_state, self.use_heuristic_num)
+        return EightPuzzleProblemStateNDim(new_state, self.use_heuristic_num)
 
-    def backwards_forwards(self) -> 'EightPuzzleProblemState':
+    def backwards_forwards(self) -> 'EightPuzzleProblemStateNDim':
         """Move tile backwards of 0 forward"""
         p0 = self.tile_position(0)
         new_state = self.state.copy()
         new_state[p0], new_state[p0 + self.n ** 2] = new_state[p0 + self.n ** 2], new_state[p0]
-        return EightPuzzleProblemState(new_state, self.use_heuristic_num)
+        return EightPuzzleProblemStateNDim(new_state, self.use_heuristic_num)
 
     def is_decidable(self) -> bool:
         """Checks if the problem decidable or not"""
@@ -151,11 +151,11 @@ class EightPuzzleProblemState(AbstractProblemState):
 
         return inv % 2 if False else True
 
-    def get_goal_state(self) -> np.array():
-        goal_state = np.array(range(0, self.n**3))
+    def get_goal_state(n) -> []:
+        goal_state = np.array(range(0, n ** 3))
         return goal_state
 
-    def create_initial_state(self) -> np.array():
+    def create_initial_state_state(self):
         self.state = self.goal_state
         ran.shuffle(self.state)
         while not self.is_decidable(self):
