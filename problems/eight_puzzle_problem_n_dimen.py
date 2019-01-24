@@ -3,6 +3,30 @@ import numpy as np
 import random as ran
 
 
+def is_decidable(state, n) -> bool:
+    """Checks if the problem decidable or not"""
+    inv = 0
+    for i in range(0, n ** 3 - 1):
+        if state[i] != 0:
+            for j in range(0, i - 1):
+                if state[j] > state[i]:
+                    inv += 1
+
+    for i in range(0, n ** 3 - 1):
+        if state[i] == 0:
+            inv += 1 + i / 4
+
+    return inv % 2 if False else True
+
+
+def create_initial_state_state(n=3):
+    state = np.array(range(0, n ** 3))
+    ran.shuffle(state)
+    while not is_decidable(state, n):
+        ran.shuffle(state)
+    return state
+
+
 class EightPuzzleProblemStateNDim(AbstractProblemState):
     # Grid positions are defined as such:
     # 0 1 2
@@ -11,23 +35,23 @@ class EightPuzzleProblemStateNDim(AbstractProblemState):
     # goal_state = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 
     def __init__(self, heuristic=0, n=3):
-        self.goal_state = self.get_goal_state(n)  # depending on dimension we create new goal state
-        self.state = self.create_initial_state_state(self)  # state # shuffles the goal_state and checks if it is decidable
-        self.use_heuristic_num = heuristic
         self.n = n  # dimension
+        self.goal_state = np.array(range(0, n ** 3))  # depending on dimension we create new goal state
+        self.state = create_initial_state_state(n)  # state # shuffles the goal_state and checks if it is decidable
+        self.use_heuristic_num = heuristic
 
     def __str__(self):
         # return self.state[:3] + "\n" + self.state[3:6] + "\n" +
         # self.state[7:]
-        s = self.state
-        output_array = ""
+        # s = self.state
+        output_array = "\n"
         for i in range(0, self.n ** 3):
             output_array += "%d\t" % self.state[i]
             if (i + 1) % self.n == 0:
                 output_array += "\n"
             if (i + 1) % (self.n ** 2) == 0:
                 output_array += "\n"
-        return output_array # changed the method of showing array # "\n{} {} {}\n{} {} {}\n{} {} {}\n".format(s[0], s[1], s[2], s[3], s[4], s[5], s[6], s[7], s[8])
+        return output_array  # changed the method of showing array # "\n{} {} {}\n{} {} {}\n{} {} {}\n".format(s[0], s[1], s[2], s[3], s[4], s[5], s[6], s[7], s[8])
 
     def __eq__(self, other):
         return self.state == other.state
@@ -80,7 +104,8 @@ class EightPuzzleProblemStateNDim(AbstractProblemState):
         return sum_of_distances
 
     @staticmethod
-    def manhatten_distance(a: int, b: int) -> int:  # Marcus, I cannot understand for what this method is... that is why I cannot change it
+    def manhatten_distance(a: int,
+                           b: int) -> int:  # Marcus, I cannot understand for what this method is... that is why I cannot change it
         a_x = a % 3
         a_y = int(a / 3)
         b_x = b % 3
@@ -88,7 +113,7 @@ class EightPuzzleProblemStateNDim(AbstractProblemState):
         return int(abs(a_x - b_x) + abs(a_y - b_y))
 
     def is_goal_state(self):
-        return self.state == self.goal_state
+        return self.state.all() == self.goal_state.all()
 
     def tile_position(self, n: int) -> int:
         """Returns the index of the field containing n"""
@@ -136,30 +161,7 @@ class EightPuzzleProblemStateNDim(AbstractProblemState):
         new_state[p0], new_state[p0 + self.n ** 2] = new_state[p0 + self.n ** 2], new_state[p0]
         return EightPuzzleProblemStateNDim(new_state, self.use_heuristic_num)
 
-    def is_decidable(self) -> bool:
-        """Checks if the problem decidable or not"""
-        inv = 0
-        for i in range(0, self.n ** 3 - 1):
-            if self.state[i] != 0:
-                for j in range(0, i - 1):
-                    if self.state[j] > self.state[i]:
-                        inv += 1
-
-        for  i in range(0, self.n ** 3 - 1):
-            if self.state[i] == 0:
-                inv += 1 + i / 4
-
-        return inv % 2 if False else True
-
-    def get_goal_state(n) -> []:
-        goal_state = np.array(range(0, n ** 3))
-        return goal_state
-
-    def create_initial_state_state(self):
-        self.state = self.goal_state
-        ran.shuffle(self.state)
-        while not self.is_decidable(self):
-            self.state = self.goal_state
-            ran.shuffle(self.state)
-        return self.state
-
+    @property
+    def get_goal_state(n=3) -> []:
+        dim = np.power(3, 3)
+        return np.array(range(0, dim))
